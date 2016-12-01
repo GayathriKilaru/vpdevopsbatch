@@ -11,7 +11,9 @@ web1-ubuntu ansible_ssh_host=192.168.0.59
 [datacenterAZ:children]
  webservers
  dbservers
+ web
 
 [datacenterAZ:vars]
 ansible_ssh_user=vagrant
 ansible_ssh_pass=vagrant
+
