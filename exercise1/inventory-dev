@@ -1,0 +1,17 @@
+web1-centos ansible_ssh_host=192.168.0.69 
+web1-ubuntu ansible_ssh_host=192.168.0.59 
+
+[webservers]
+  web1-centos
+  web1-ubuntu
+
+[dbservers]
+  db1
+
+[datacenterAZ:children]
+ webservers
+ dbservers
+
+[datacenterAZ:vars]
+ansible_ssh_user=vagrant
+ansible_ssh_pass=vagrant

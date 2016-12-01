@@ -1,0 +1,9 @@
+---
+# handlers file for dbservers
+- name: Restart mysql-server
+  service: name=mysqld state=restarted
+  when: ansible_os_family == "RedHat"
+
+- name: Restart mysql-server
+  service: name=mysql state=restarted
+  when: ansible_os_family == "Debian"

@@ -1,0 +1,30 @@
+---
+- hosts: web1
+  become: yes
+  
+  tasks: #installing apache server
+
+  - name: Ensure apache is installed
+    yum: name=httpd state=present
+
+  - name: Ensure apache is running
+    service: name=httpd state=started
+
+- hosts: db1
+  become: yes
+
+  tasks: #installing mysql-server
+
+  - name: Ensure mysql-server is installed
+    yum: name=mysql-server state=present
+
+  - name: Ensure mysqld is running
+    service: name=mysqld state=started 
+
+- hosts: all
+  become: yes
+
+  tasks: #iptables off
+
+  - name: Ensure iptables are off
+    service: name=iptables state=stopped 

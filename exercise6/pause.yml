@@ -1,0 +1,16 @@
+--- #use of pause module
+- hosts: webservers
+  become: yes
+  
+  tasks:
+
+  - name: Install telnet and lynx packages
+    yum: pkg={{ item }} state=present
+    with_items:
+      - telnet
+      - lynx
+
+  - name: pause
+    pause:
+     prompt: Press Enter to continue
+    

@@ -1,0 +1,3 @@
+#Variables for all the instances defined in inventory file
+
+username: commonuser

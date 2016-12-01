@@ -1,0 +1,41 @@
+---
+# tasks file for vpwebserver
+- name: Ensure apache is installed
+  yum: name=httpd state=present
+  when: ansible_os_family == "RedHat"
+
+- name: Ensure apache is running
+  service: name=httpd enabled=yes state=started
+  when: ansible_os_family == "RedHat"
+
+- name: Ensure apache is installed
+  apt: name=apache2 state=present
+  when: ansible_os_family == "Debian"
+
+- name: Ensure apache is running
+  service: name=apache2 enabled=yes state=started
+  when: ansible_os_family == "Debian"
+
+- name: create ansible directory to server webpage
+  file: path=/var/www/html/ansible state=directory
+
+- name: deploy httpd configuration file
+  template: src=httpd.j2 dest=/etc/httpd/conf/httpd.conf
+  when: ansible_os_family == "RedHat"
+
+- name: deploy apache2 configuration file
+  template: src=ubuntu.j2 dest=/etc/apache2/mods-available/mpm_prefork.conf
+  when: ansible_os_family == "Debian"
+
+- name: Deploy website files
+  template: src=index.j2 dest={{ doc_root }}/ansible/index.html mode=0644
+  notify:
+    - Restart apache
+  
+- name: iptables off
+  service: name=iptables state=stopped
+  when: ansible_os_family == "RedHat"
+
+- name: ufw off
+  service: name=ufw state=stopped
+  when: ansible_os_family == "Debian"

@@ -1,0 +1,9 @@
+---
+# handlers file for vpwebserver
+- name: Restart apache
+  service: name=httpd state=restarted
+  when: ansible_os_family == "RedHat"
+
+- name: Restart apache
+  service: name=apache2 state=restarted
+  when: ansible_os_family == "Debian"

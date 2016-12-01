@@ -1,0 +1,25 @@
+---
+- hosts: webservers
+  become: yes
+  roles:
+    - vpwebserver
+ 
+
+ 
+ 
+
+  
+
+ 
+
+
+#- hosts: db1
+  #become: yes
+
+  #tasks: 
+
+ # - name: Ensure mysql-server is installed
+  #  yum: name=mysql-server state=present
+
+ # - name: Ensure mysqld is running
+#    service: name=mysqld state=started
